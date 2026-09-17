@@ -40,6 +40,7 @@ interface AuthState {
   userType: USER_TYPE;
   status: AsyncStatus;
   error: string | null;
+  isLoading?: boolean;
 }
 
 const initialState: AuthState = {
@@ -49,6 +50,7 @@ const initialState: AuthState = {
   userType: "PLATFORM_ADMIN",
   status: "idle",
   error: null,
+  isLoading: false,
 };
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------------ */
@@ -163,7 +165,7 @@ export const authSlice = createSlice({
         state.status = "succeeded";
         state.user = {
           ...action.payload,
-          avatarName: `${action.payload?.fullName?.split(" ")?.[0]?.[0] ?? ""}${action.payload?.fullName?.split(" ")?.[1]?.[0]}`,
+          avatarName: `${action.payload?.fullName?.split(" ")?.[0]?.[0] ?? ""}${action.payload?.fullName?.split(" ")?.[1]?.[0] ?? ""}`,
         };
       })
       .addCase(fetchMe.rejected, (state) => {
@@ -202,20 +204,26 @@ export const authSlice = createSlice({
 
       /* user account update information */
       .addCase(updateCurrentUser.pending, (state) => {
-        state.status = "loading";
+        // state.status = "loading";
+        state.isLoading = true;
       })
       .addCase(updateCurrentUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        // state.status = "succeeded";
+        state.isLoading = false;
+
+        const user = (action.payload as any)?.data;
+
         state.user = {
           ...state.user!,
-          fullName: action?.payload?.fullName,
-          email: action?.payload?.email,
-          phone: action?.payload?.phone,
-          avatarName: `${action.payload?.fullName?.split(" ")?.[0]?.[0] ?? ""}${action.payload?.fullName?.split(" ")?.[1]?.[0]}`,
+          fullName: user?.fullName,
+          email: user?.email,
+          phone: user?.phone,
+          avatarName: `${user?.fullName?.split(" ")?.[0]?.[0] ?? ""}${user?.fullName?.split(" ")?.[1]?.[0] ?? ""}`,
         };
       })
       .addCase(updateCurrentUser.rejected, (state) => {
-        state.status = "failed";
+        // state.status = "failed";
+        state.isLoading = false;
       });
     /* ------------------------------------------------------------------------------------------------------------------------------ */
     /* ------------------------------------------------------------------------------------------------------------------------------ */

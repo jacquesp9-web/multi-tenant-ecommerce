@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAppDispatch } from "@/hooks/use-store";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
 import { updateCurrentUser, type IUser } from "@/store/auth/authSlice";
 import { CircleCheckBig, PenLineIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -23,7 +23,9 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
     avatarName: user?.avatarName,
   });
 
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const isLoading = useAppSelector((state) => state?.auth?.isLoading);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setData({
@@ -53,6 +55,7 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
 
     if (response?.payload?.success) {
       toast.success(response?.payload?.message);
+      setIsOpen(false);
     } else {
       toast.error(response?.payload?.message);
     }
@@ -61,7 +64,7 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
   /* ------------------------------------------------------------------------------------------------------------------------------ */
   /* ------------------------------------------------------------------------------------------------------------------------------ */
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="h-11 cursor-pointer gap-2">
           <PenLineIcon size={18} />
@@ -88,7 +91,7 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
               placeholder="Enter your Full Name"
               value={data?.fullName}
               name="fullName"
-              disabled={isSubmitting}
+              disabled={isLoading}
               onChange={handleChange}
               required
             />
@@ -102,7 +105,7 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
               placeholder="Enter your Email Address"
               value={data?.email}
               name="email"
-              disabled={isSubmitting}
+              disabled={isLoading}
               onChange={handleChange}
               required
             />
@@ -116,7 +119,7 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
               placeholder="Enter your Contct Number"
               value={data?.phone}
               name="phone"
-              disabled={isSubmitting}
+              disabled={isLoading}
               onChange={handleChange}
               required
             />
@@ -125,8 +128,9 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
           {/* user account buttons */}
           <div className="mt-4">
             <Button className="flex gap-2 h-11 px-4 mx-auto cursor-pointer text-sm font-medium">
-              <CircleCheckBig size={18} />
-              Update Account Profile
+              {isLoading
+                ? "Updating Account Profile...."
+                : "Update Account Profile"}
             </Button>
           </div>
         </form>
