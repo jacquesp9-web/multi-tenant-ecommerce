@@ -16,7 +16,6 @@ import {
   HandCoinsIcon,
   HeadsetIcon,
   LayoutDashboardIcon,
-  LayoutGridIcon,
   LogOut,
   MegaphoneIcon,
   NotebookTextIcon,
@@ -92,7 +91,7 @@ const AppSidebar = () => {
               <span className="text-[16px] font-medium text-white">
                 Platform Admin
               </span>
-              <span className="text-[14px] text-white">v.1.0.0</span>
+              <span className="text-sm text-white">v.1.0.0</span>
             </div>
           </div>
         </SidebarMenu>
@@ -131,11 +130,11 @@ const AppSidebar = () => {
             </AvatarFallback>
           </Avatar>
 
-          <div className="min-w-0 flex-1">
-            <div className="truncate text-[14px] font-medium text-accent">
+          <div className="min-w-0 flex-1 space-y-0.5">
+            <div className="truncate text-sm font-medium text-accent">
               {user?.fullName}
             </div>
-            <div className="truncate text-[14px] font-normal text-accent">
+            <div className="truncate text-sm font-normal text-accent">
               {user?.email}
             </div>
           </div>

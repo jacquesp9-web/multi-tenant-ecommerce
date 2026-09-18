@@ -16,6 +16,7 @@ export interface loginResponse {
 
 interface SuccessResponse {
   success: string;
+  message?: string;
 }
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------------ */
@@ -26,16 +27,22 @@ export const authApi = {
   login: (payload: loginPayload) =>
     Axios.post<loginResponse>("/auth/login", payload).then((res) => res?.data),
 
-  /* fetcgin user account information */
+  /* user account fetching account information */
   me: () => Axios.get<IUser>("/auth/me").then((res) => res?.data),
 
   /* user account logout */
   logout: () =>
     Axios.post<SuccessResponse>("/auth/logout").then((res) => res?.data),
 
-  /* user account information update */
+  /* user account update information */
   updateCurrentUser: (payload: Partial<IUser>) =>
     Axios.put<IUser>("/users/me", payload).then((res) => res?.data),
+
+  /* user account change password */
+  changePassword: (payload: Partial<IUser>) =>
+    Axios.put<SuccessResponse>("/users/change-password", payload).then(
+      (res) => res?.data,
+    ),
 };
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------------ */

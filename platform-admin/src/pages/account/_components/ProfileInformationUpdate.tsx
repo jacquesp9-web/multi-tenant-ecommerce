@@ -66,12 +66,15 @@ const ProfileInformationUpdate = ({ user }: { user: IUser }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="h-11 cursor-pointer gap-2">
+        <Button
+          variant="outline"
+          className="h-11 px-3 cursor-pointer hover:bg-emerald-600 hover:text-white hover:rounded-full"
+        >
           <PenLineIcon size={18} />
           Edit Your Profile
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full lg:max-w-md min-h-28 p-4 lg:p-6">
+      <DialogContent className="w-full lg:max-w-sm min-h-28 p-4 lg:p-6">
         <TitleHeading
           title="Edit Your Profile"
           classNameTitle="font-semibold text-[16px]"

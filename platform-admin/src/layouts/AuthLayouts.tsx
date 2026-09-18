@@ -34,13 +34,13 @@ export default function AuthLayouts() {
           <h1 className="max-w-100 text-2xl leading-snug font-bold text-white text-center">
             Run Every Store On Your Marketplace From One Place
           </h1>
-          <p className="mt-4 max-w-100 text-[14px] leading-5 text-[#C7DCCB] text-center">
+          <p className="mt-4 max-w-100 text-sm leading-5 text-[#C7DCCB] text-center">
             Tenants, Catelogs, Commissions, Delivery Network and Reporting -
             unified across every Store on the Platform.
           </p>
         </div>
 
-        <p className="text-[14px] text-[#8FB093] text-center">
+        <p className="text-sm text-[#8FB093] text-center">
           &copy; 2026 JacPot Consulting(Pty) Ltd
         </p>
       </div>

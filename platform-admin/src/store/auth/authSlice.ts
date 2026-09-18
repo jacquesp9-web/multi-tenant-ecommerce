@@ -5,6 +5,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 
+export interface IRole {
+  id: string;
+  name: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 export interface IUser {
   id: string;
   email: string;
@@ -15,6 +22,8 @@ export interface IUser {
   avatarName: string;
   twoFactorEnabled?: boolean;
   twoFactorSecret?: boolean;
+  password?: string;
+  role?: IRole;
   userType?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -126,6 +135,24 @@ export const updateCurrentUser = createAsyncThunk(
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------------ */
 
+/* user account change password */
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (payload: Partial<IUser>, { rejectWithValue }) => {
+    try {
+      const data = await authApi.changePassword(payload);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        getAxiosErrorMessage(error, "Failed to Update User Account Password"),
+      );
+    }
+  },
+);
+/* ------------------------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------------------------ */
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -225,6 +252,8 @@ export const authSlice = createSlice({
         // state.status = "failed";
         state.isLoading = false;
       });
+
+    /* user account change password */
     /* ------------------------------------------------------------------------------------------------------------------------------ */
     /* ------------------------------------------------------------------------------------------------------------------------------ */
   },

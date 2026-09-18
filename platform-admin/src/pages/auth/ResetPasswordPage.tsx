@@ -64,7 +64,7 @@ export default function ResetPasswordPage() {
           <CheckCircle2 size={40} className="text-primary" />
         </div>
         <h1 className="mt-2 text-2xl font-bold">Password Update</h1>
-        <p className="mt-2 text-[14px] text-muted-foreground text-center">
+        <p className="mt-2 text-sm text-muted-foreground text-center">
           Your Password has been reset Successfully. You can now Sign In with
           the New Password
         </p>
@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
   return (
     <div className="w-full max-w-sm">
       <h1 className="text-2xl font-bold ">Reset Your Password</h1>
-      <p className="mt-1.5 text-[14px] text-muted-foreground">
+      <p className="mt-1.5 text-sm text-muted-foreground">
         {email ? (
           <>
             New Password for{" "}
@@ -94,7 +94,7 @@ export default function ResetPasswordPage() {
       <form className="mt-4" onSubmit={handleSubmit}>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="password" className="text-[14px]">
+            <FieldLabel htmlFor="password" className="text-sm">
               New Password
             </FieldLabel>
             <PasswordInput
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="password" className="text-[14px]">
+            <FieldLabel htmlFor="password" className="text-sm">
               Confirm Password
             </FieldLabel>
             <PasswordInput
@@ -125,15 +125,13 @@ export default function ResetPasswordPage() {
             />
 
             {misMatch && (
-              <FieldError className="mt-4 text-center text-[14px] font-medium bg-rose-600 p-1 rounded text-white">
+              <FieldError className="mt-4 text-center text-sm font-medium bg-rose-600 p-1 rounded text-white">
                 New Password & Confirm Password does not Match
               </FieldError>
             )}
           </Field>
 
-          {error && (
-            <p className="mt-2 text-[14px] text-destructive">{error}</p>
-          )}
+          {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
 
           <Button type="submit" className="mt-0 h-10 w-full cursor-pointer">
             {isSubmitting ? (
@@ -148,7 +146,7 @@ export default function ResetPasswordPage() {
         </FieldGroup>
       </form>
 
-      <div className="mt-4 flex items-center justify-center gap-1 text-[14px] text-muted-foreground">
+      <div className="mt-4 flex items-center justify-center gap-1 text-sm text-muted-foreground">
         <ShieldCheckIcon size="16" />
         Protected by SSO and 2-Factor Authentication
       </div>

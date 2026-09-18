@@ -1,5 +1,5 @@
-import { ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -49,14 +49,14 @@ const ForgotPasswordOtpVerificationPage = () => {
       <Link
         to={"/auth/login"}
         aria-label="Back to Sign In"
-        className="mb-4 inline-flex text-foreground items-center gap-1 text-[14px]"
+        className="mb-4 inline-flex text-foreground items-center gap-1 text-sm"
       >
         <ArrowLeft size={16} />
         Back
       </Link>
 
       <h2 className="text-2xl font-bold">OTP Verification Code</h2>
-      <p className="mt-1.5 text-[14px] text-muted-foreground">
+      <p className="mt-1.5 text-sm text-muted-foreground">
         {email ? (
           <>
             We've emailed a 6-digit OTP Verification Code to{" "}
@@ -85,7 +85,7 @@ const ForgotPasswordOtpVerificationPage = () => {
           </InputOTPGroup>
         </InputOTP>
 
-        {error && <p className="mt-2 text-[14px] text-destructive">{error}</p>}
+        {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
 
         <Button type="submit" className="mt-4 h-10 w-full cursor-pointer">
           {isSubmitting ? (

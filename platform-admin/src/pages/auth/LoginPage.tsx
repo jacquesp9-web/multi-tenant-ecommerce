@@ -36,7 +36,11 @@ export default function LoginPage() {
         }),
       ).unwrap()) as loginResponse;
 
-      if (!response.accessToken || !response.refreshToken || !response.userType) {
+      if (
+        !response.accessToken ||
+        !response.refreshToken ||
+        !response.userType
+      ) {
         throw new Error("Invalid login response");
       }
 
@@ -54,14 +58,14 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-sm">
       <h1 className="text-2xl font-bold ">Sign In</h1>
-      <p className="mt-1.5 text-[14px] text-muted-foreground">
+      <p className="mt-1.5 text-sm text-muted-foreground">
         Access the Platform Admin console
       </p>
 
       <form className="mt-4" onSubmit={handleSubmit}>
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="email" className="text-[14px]">
+            <FieldLabel htmlFor="email" className="text-sm">
               Email Address
             </FieldLabel>
             <Input
@@ -79,12 +83,12 @@ export default function LoginPage() {
 
           <Field>
             <div className="flex items-center justify-between">
-              <FieldLabel htmlFor="password" className="text-[14px]">
+              <FieldLabel htmlFor="password" className="text-sm">
                 Password
               </FieldLabel>
               <Link
                 to={"/auth/forgot-password"}
-                className="text-[14px] font-medium text-primary hover:underline"
+                className="text-sm font-medium text-primary hover:underline"
               >
                 Forgot Your Password?
               </Link>
@@ -102,7 +106,7 @@ export default function LoginPage() {
           </Field>
 
           {error && (
-            <p className="mt-0 flex items-center justify-center gap-2 bg-rose-100 border border-rose-500 p-2 rounded-sm text-center text-[14px] text-rose-700">
+            <p className="mt-0 flex items-center justify-center gap-2 bg-rose-100 border border-rose-500 p-2 rounded-sm text-center text-sm text-rose-700">
               <TriangleAlert size={16} />
               {error}
             </p>
@@ -124,7 +128,7 @@ export default function LoginPage() {
         </FieldGroup>
       </form>
 
-      <div className="mt-4 flex items-center justify-center gap-1 text-[14px] text-muted-foreground">
+      <div className="mt-4 flex items-center justify-center gap-1 text-sm text-muted-foreground">
         <ShieldCheckIcon size="16" />
         Protected by SSO and 2-Factor Authentication
       </div>

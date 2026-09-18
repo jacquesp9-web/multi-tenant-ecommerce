@@ -24,7 +24,7 @@ import { type JwtAccessPayload } from '../auth/types/jwt-payload.type.js';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  /* update user account information */
+  /* user account update user information */
   @Put('me')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
@@ -34,4 +34,19 @@ export class UsersController {
   ) {
     return this.usersService.update(user?.userId, data);
   }
+  /* ---------------------------------------------------------------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------------------------------------------------------------- */
+
+  /* user account change password */
+  @Put('change-password')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard)
+  async ChangePassword(
+    @CurrentUser() user: JwtAccessPayload,
+    @Body() data: UpdateUserDto,
+  ) {
+    return this.usersService.changePassword(user?.userId, data);
+  }
+  /* ---------------------------------------------------------------------------------------------------------------------------- */
+  /* ---------------------------------------------------------------------------------------------------------------------------- */
 }
